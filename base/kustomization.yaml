@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - ../upstream/base/all
+- ../upstream/network-policies
 patchesStrategicMerge:
 - |-
   apiVersion: v1
@@ -11,3 +12,4 @@ patchesStrategicMerge:
   $patch: delete
 components:
 - ../upstream/sidecars/all
+- network-policies

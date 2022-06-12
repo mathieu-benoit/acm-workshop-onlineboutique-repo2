@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+patchesJson6902:
+- target:
+    kind: NetworkPolicy
+    name: frontend
+  patch: |-
+    - op: replace
+      path: /spec/ingress
+      value:
+        - from:
+          - podSelector:
+              matchLabels:
+                app: loadgenerator
+          - namespaceSelector:
+              matchLabels:
+                name: asm-ingress
+            podSelector:
+              matchLabels:
+                app: asm-ingressgateway
+          ports:
+          - port: 8080
+            protocol: TCP
