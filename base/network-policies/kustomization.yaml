@@ -21,3 +21,10 @@ patchesJson6902:
           ports:
           - port: 8080
             protocol: TCP
+patchesStrategicMerge:
+- |-
+  apiVersion: networking.k8s.io/v1
+  kind: NetworkPolicy
+  metadata:
+    name: redis-cart
+  $patch: delete

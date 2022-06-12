@@ -15,3 +15,5 @@ components:
 - network-policies
 - ../upstream/service-accounts/all
 - ../upstream/authorization-policies/all
+- ../upstream/service-accounts/for-memorystore
+- ../upstream/authorization-policies/for-memorystore
