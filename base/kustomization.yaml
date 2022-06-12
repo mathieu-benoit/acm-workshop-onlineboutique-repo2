@@ -13,3 +13,5 @@ patchesStrategicMerge:
 components:
 - ../upstream/sidecars/all
 - network-policies
+- ../upstream/service-accounts/all
+- ../upstream/authorization-policies/all

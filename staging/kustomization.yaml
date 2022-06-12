@@ -6,6 +6,8 @@ namespace: onlineboutique
 components:
 - for-virtualservice-host
 - sidecars/for-namespace
+- authorization-policies/for-namespace
+- authorization-policies/for-ingress-gateway
 patchesJson6902:
 - patch: |-
     - op: replace

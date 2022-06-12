@@ -1,0 +1,18 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: authorization-policies
+upstream:
+  type: git
+  git:
+    repo: https://github.com/GoogleCloudPlatform/anthos-service-mesh-samples
+    directory: /docs/online-boutique-asm-manifests/authorization-policies
+    ref: main
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://github.com/GoogleCloudPlatform/anthos-service-mesh-samples
+    directory: /docs/online-boutique-asm-manifests/authorization-policies
+    ref: main
+    commit: 203145e2d285999ce3a2449b66e57082e96a9351
