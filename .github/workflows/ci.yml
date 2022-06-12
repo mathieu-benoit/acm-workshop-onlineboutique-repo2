@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: google-github-actions/setup-gcloud@v0.5.0
+      - name: install kpt and nomos	
+        run: |
+          gcloud components install kpt nomos --quiet
+      - name: kustomize	
+        run: |
+          mkdir tmp
+          kubectl kustomize staging > tmp/manifests.yaml
+      - name: vet	
+        run: |
+          nomos vet --path tmp/ --no-api-server-check --source-format unstructured
+      - name: kubeval
+        if: ${{ always() }}
+        run: |
+          kpt fn eval tmp/ --results-dir results --image gcr.io/kpt-fn/kubeval:v0.2 -- strict=true ignore_missing_schemas=true
+      - name: gatekeeper
+        if: ${{ always() }}
+        run: |
+          kpt fn eval tmp/ --results-dir results --image gcr.io/kpt-fn/gatekeeper:v0.2

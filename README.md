@@ -1,0 +1,1 @@
+# config-sync-app-template-repo
