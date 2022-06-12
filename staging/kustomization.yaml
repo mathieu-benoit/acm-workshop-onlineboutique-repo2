@@ -5,91 +5,92 @@ resources:
 namespace: onlineboutique
 components:
 - for-virtualservice-host
+- sidecars/for-namespace
 patchesJson6902:
-- target:
-    kind: Deployment
-    name: adservice
-  patch: |-
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/adservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: cartservice
-  patch: |-
+    name: adservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/cartservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: checkoutservice
-  patch: |-
+    name: cartservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/checkoutservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: currencyservice
-  patch: |-
+    name: checkoutservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/currencyservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: emailservice
-  patch: |-
+    name: currencyservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/emailservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: frontend
-  patch: |-
+    name: emailservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/frontend:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: loadgenerator
-  patch: |-
+    name: frontend
+- patch: |-
     - op: replace
       path: /spec/template/spec/initContainers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/busybox:latest
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/loadgenerator:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: paymentservice
-  patch: |-
+    name: loadgenerator
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/paymentservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: productcatalogservice
-  patch: |-
+    name: paymentservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/productcatalogservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: recommendationservice
-  patch: |-
+    name: productcatalogservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/recommendationservice:v0.3.8
-- target:
+  target:
     kind: Deployment
-    name: shippingservice
-  patch: |-
+    name: recommendationservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: ${PRIVATE_ONLINE_BOUTIQUE_REGISTRY}/shippingservice:${ONLINE_BOUTIQUE_VERSION}
-- target:
+  target:
     kind: Deployment
-    name: redis-cart
-  patch: |-
+    name: shippingservice
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/image
       value: us-east4-docker.pkg.dev/acm-workshop-743-tenant/containers/onlineboutique/redis:alpine
+  target:
+    kind: Deployment
+    name: redis-cart

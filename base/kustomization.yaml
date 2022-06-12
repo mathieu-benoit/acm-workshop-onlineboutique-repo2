@@ -9,3 +9,5 @@ patchesStrategicMerge:
   metadata:
     name: onlineboutique
   $patch: delete
+components:
+- ../upstream/sidecars/all
