@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: memorystore-redis-tls
+spec:
+  exportTo:
+  - '.'
+  host: cart.memorystore-redis.onlineboutique
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+      caCertificates: /etc/certs/redis-cert.pem

@@ -16,15 +16,15 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 patchesJson6902:
-- target:
-    kind: Deployment
-    name: cartservice
-  patch: |-
+- patch: |-
     - op: replace
       path: /spec/template/spec/containers/0/env/0
       value:
         name: REDIS_ADDR
-        value: 10.65.64.227:6379
+        value: 10.100.38.91:6378
+  target:
+    kind: Deployment
+    name: cartservice
 patchesStrategicMerge:
 - |-
   apiVersion: apps/v1
@@ -38,4 +38,20 @@ patchesStrategicMerge:
   metadata:
     name: redis-cart
   $patch: delete
-# [END servicemesh_base_for_memorystore_kustomization_component]
+resources:
+- memorystore-redis-tls-secret.yaml
+- memorystore-redis-tls-serviceentry.yaml
+- memorystore-redis-tls-destinationrule.yaml
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: cartservice
+      spec:
+        template:
+          metadata:
+            annotations:
+              sidecar.istio.io/userVolumeMount: '[{"name": "redis-cert", "mountPath": "/etc/certs", "readonly": true}]'
+              sidecar.istio.io/userVolume: '[{"name": "redis-cert", "secret": {"secretName": "redis-cert"}}]'
+              proxy.istio.io/config: '{"holdApplicationUntilProxyStarts": true}'

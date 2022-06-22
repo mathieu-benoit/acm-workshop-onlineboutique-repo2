@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: memorystore-redis-tls
+spec:
+  hosts:
+  - cart.memorystore-redis.onlineboutique
+  addresses:
+  - 10.100.38.91/32
+  endpoints:
+  - address: 10.100.38.91
+  location: MESH_EXTERNAL
+  resolution: STATIC
+  ports:
+  - number: 6378
+    name: tcp-redis
+    protocol: TCP
