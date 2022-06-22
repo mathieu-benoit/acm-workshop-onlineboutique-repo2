@@ -261,12 +261,12 @@ spec:
       containers:
         - name: server
           securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-              - all
-          privileged: false
-          readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+            privileged: false
+            readOnlyRootFilesystem: true
           image: gcr.io/google-samples/microservices-demo/frontend:v0.3.8
           ports:
             - containerPort: 8080
