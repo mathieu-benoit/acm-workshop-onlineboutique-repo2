@@ -98,7 +98,6 @@ patchesJson6902:
   target:
     kind: Deployment
     name: redis-cart
-patchesJson6902:
 - target:
     kind: Sidecar
     name: cartservice
